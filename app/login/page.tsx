@@ -246,12 +246,20 @@ function CreateAccountModal({ isOpen, onClose, darkMode }) {
     if (isFormValid) {
       setIsLoading(true)
       try {
-        const result = await createUser(name, email, password)
+        const response = await fetch("/api/create-user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, password }),
+        })
+        const result = await response.json()
         if (result.success) {
           toast.success(result.message)
           onClose()
         } else {
           toast.error(result.message)
+          console.error("Erro detalhado:", result.error)
         }
       } catch (error) {
         console.error("Erro ao criar conta:", error)
