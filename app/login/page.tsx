@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { X } from "lucide-react"
+import { useAuth } from "@/lib/auth-context"
 
 // Mock functions (replace with your actual implementation)
 async function getUserByEmail(email: string): Promise<{ id: string } | null> {
@@ -48,6 +49,7 @@ function LoginPageContent() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { darkMode } = useTheme()
+  const { login } = useAuth()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -62,9 +64,9 @@ function LoginPageContent() {
       })
       const data = await response.json()
       if (data.success) {
+        await login(data.token, data.user)
         toast.success("Login bem-sucedido!")
-        // Aqui você pode armazenar informações do usuário no estado global ou localStorage se necessário
-        router.push("/")
+        router.push("/dashboard")
       } else {
         setIsErrorModalOpen(true)
       }

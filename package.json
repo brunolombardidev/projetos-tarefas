@@ -58,8 +58,10 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
     "zod": "^3.24.1",
+    "react-toastify": "latest",
     "mysql2": "latest",
-    "react-toastify": "latest"
+    "bcryptjs": "latest",
+    "jsonwebtoken": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
