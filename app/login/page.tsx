@@ -62,6 +62,11 @@ function LoginPageContent() {
         },
         body: JSON.stringify({ email, password }),
       })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
       const data = await response.json()
       if (data.success) {
         await login(data.token, data.user)
@@ -73,10 +78,13 @@ function LoginPageContent() {
     } catch (error) {
       console.error("Erro ao fazer login:", error)
       toast.error("Ocorreu um erro ao fazer login. Tente novamente.")
+      setIsErrorModalOpen(true)
     } finally {
       setIsLoading(false)
     }
   }
+
+  // ... rest of the component code
 
   return (
     <div className={`min-h-screen ${darkMode ? "bg-[#1F1F1F]" : "bg-gray-100"} flex items-center justify-center`}>
@@ -150,7 +158,7 @@ function LoginPageContent() {
   )
 }
 
-// ... (outros componentes permanecem os mesmos)
+// ... rest of the file content (ForgetPasswordModal, CreateAccountModal, ErrorModal)
 
 function ForgetPasswordModal({ isOpen, onClose, darkMode }) {
   const [email, setEmail] = useState("")
