@@ -253,16 +253,18 @@ function CreateAccountModal({ isOpen, onClose, darkMode }) {
           },
           body: JSON.stringify({ name, email, password }),
         })
+
         const result = await response.json()
-        if (result.success) {
+        console.log("Resposta do servidor:", result)
+
+        if (response.ok && result.success) {
           toast.success(result.message)
           onClose()
         } else {
-          toast.error(result.message)
-          console.error("Erro detalhado:", result.error)
+          toast.error(result.message || "Erro ao criar conta")
         }
       } catch (error) {
-        console.error("Erro ao criar conta:", error)
+        console.error("Erro detalhado ao criar conta:", error)
         toast.error("Ocorreu um erro ao criar a conta. Tente novamente.")
       } finally {
         setIsLoading(false)
