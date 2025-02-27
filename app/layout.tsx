@@ -4,7 +4,7 @@ import { ThemeProvider } from "./theme-context"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body>
         <AuthProvider>
           <ThemeProvider>{children}</ThemeProvider>

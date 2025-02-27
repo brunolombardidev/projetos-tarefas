@@ -23,7 +23,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter()
 
   useEffect(() => {
-    // Check if user is logged in on initial load
+    // Verificar se o usuário está logado ao carregar a página
     const token = localStorage.getItem("token")
     const storedUser = localStorage.getItem("user")
     if (token && storedUser) {
